@@ -613,10 +613,12 @@ ul {
       border-top: 1px #d2cdcd solid;
       margin-top: 20px;
       padding-top: 20px; }
-      .wrapper .aside .otherInfo div .fa {
-        padding-right: 5px;
-        color: #999;
-        font-size: 14px; }
+      .wrapper .aside .otherInfo div {
+        word-break: break-all; }
+        .wrapper .aside .otherInfo div .fa {
+          padding-right: 5px;
+          color: #999;
+          font-size: 14px; }
       .wrapper .aside .otherInfo ul {
         display: flex;
         flex-wrap: wrap;
