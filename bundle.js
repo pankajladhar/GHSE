@@ -37095,6 +37095,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _lodash = __webpack_require__(160);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37113,7 +37117,8 @@
 
 	        _this.state = {
 	            selected: "Username",
-	            userInput: ""
+	            userInput: "",
+	            hasError: false
 	        };
 	        _this.onClickHandler = _this.onClickHandler.bind(_this);
 	        _this.selectBoxChangeHandler = _this.selectBoxChangeHandler.bind(_this);
@@ -37128,7 +37133,7 @@
 	                e.preventDefault();
 	                var txtValue = this.state.userInput;
 	                var dropDownSelectedValue = this.state.selected;
-	                this.props.searchOnClickHandler(txtValue, dropDownSelectedValue);
+	                !_lodash2["default"].isEmpty(txtValue) ? this.props.searchOnClickHandler(txtValue, dropDownSelectedValue) : this.setState({ hasError: true });
 	            }
 
 	            return onClickHandler;
@@ -37146,7 +37151,18 @@
 	        key: "onChangeHandler",
 	        value: function () {
 	            function onChangeHandler(e) {
-	                this.setState({ userInput: e.target.value });
+	                var val = e.target.value;
+	                if (_lodash2["default"].isEmpty(val)) {
+	                    this.setState({
+	                        hasError: true,
+	                        userInput: ""
+	                    });
+	                } else {
+	                    this.setState({
+	                        userInput: val,
+	                        hasError: false
+	                    });
+	                }
 	            }
 
 	            return onChangeHandler;
@@ -37198,7 +37214,7 @@
 	                            ),
 	                            _react2["default"].createElement("input", { type: "text",
 	                                tabIndex: "1",
-	                                className: "",
+	                                className: this.state.hasError ? "error" : "",
 	                                placeholder: "Enter A Github Username",
 	                                onChange: this.onChangeHandler
 	                            }),
