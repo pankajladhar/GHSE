@@ -195,6 +195,10 @@ ul{
         }
       }
     }
+    .repo_lastUpdated{
+      font-style: italic;
+      margin-top: 20px;
+    }
     .repo-language-color {
         &:before{
           content: "";

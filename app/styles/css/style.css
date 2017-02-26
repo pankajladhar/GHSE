@@ -680,6 +680,9 @@ ul {
         background: #d9534f; }
       .repo .repo__otherInfo ul li:nth-child(4) {
         background: #4CAF50; }
+  .repo .repo_lastUpdated {
+    font-style: italic;
+    margin-top: 20px; }
   .repo .repo-language-color:before {
     content: "";
     position: relative;

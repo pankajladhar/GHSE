@@ -1,6 +1,7 @@
 'use strict';
 
 import React from "react";
+import moment from 'moment';
 
 class Repo extends React.Component{
     constructor(props){
@@ -10,6 +11,10 @@ class Repo extends React.Component{
     __getClassName(val){
         return val && val.toLowerCase();
     };
+
+    __getFromattedDate(d){
+        return moment(d).format("MMMM Do YYYY, h:mm:ss a")
+    }
 
     render(){
         const {repos} = this.props;
@@ -29,10 +34,9 @@ class Repo extends React.Component{
                             <li>{repos.stargazers_count + " Stars"}</li>
                         </ul>
                     </div>
-                    <span className="repo_lastUpdated">
-                        {"Updated on  " + repos.pushed_at}
-                        {/*Updated 11 days ago*/}
-                    </span>
+                    <div className="repo_lastUpdated">
+                        {"Updated on  " + this.__getFromattedDate(repos.pushed_at)}
+                    </div>
                 </div>
         )
     }
