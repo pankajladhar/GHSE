@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+@import "normalize";
+body {
+  padding: 0px;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  color: #333;
+  background: #f5f5f5;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+a {
+    color: #4078c0;
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline;
+    }
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+  li{
+    list-style: none;
+  }
+}
+
+@import "components/header";
+@import "components/loader";
+
+.wrapper{
+    display: flex;
+    padding: 80px 20px;
+    display: flex;
+    padding-top: 80px;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+  .aside{
+    width: 22%; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    .container{
+        box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+        background: #fff;
+        padding: 20px;
+    }
+    .avatarContainer{
+      width: 100%;
+      .profile-img{
+        display: block;
+        max-width: 100%;
+        border-radius: 6px;
+        width:100%;
+      }
+      .name{
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 1;
+      }
+      .userName{
+        font-size: 20px;
+        color: #666;
+      }
+      .viewProfile{
+        margin: 20px 0;
+        color: #000;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 6px 12px;
+        font-size: 14px;
+        background-color: #eee;
+        background-image: -webkit-linear-gradient(#fcfcfc, #eee);
+        background-image: linear-gradient(#fcfcfc, #eee);
+        border: 1px solid #d5d5d5;
+        border-radius: 3px;
+        display: block;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .otherInfo{
+      width: 100%;
+      font-size: 14px;
+      color: #333;
+      border-top: 1px #d2cdcd solid;
+      margin-top: 20px;
+      padding-top: 20px;
+      div{
+        .fa{
+          padding-right:5px;
+          color: #999;
+          font-size: 14px;
+        }
+      }
+      ul{
+          display: flex;
+          flex-wrap: wrap;
+          width: 100%;
+        li{
+          color: #fff;
+          padding: 8px 0;
+          flex: 1 50%; 
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .number{
+            padding-right:4px;
+          }
+          &:nth-child(1){
+            background: #5bc0de;
+          }
+          &:nth-child(2){
+            background: #0275d8;
+          }
+          &:nth-child(3){
+            background: #d9534f;
+          }
+          &:nth-child(4){
+              background: #373a3c;
+          }
+        }
+      }
+    }
+    
+  }
+  .content{
+    width:75%;
+    h4{
+      margin: 0;
+      padding: 0;
+      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+}
+
+.repositories{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.repo{
+    // border: 1px #e5e5e5 solid;
+    color: #767676;
+    font-size: 12px;
+    width: 49%;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+    background: #fff;
+    .repo-language-color {
+        &:before{
+          content: "";
+          position: relative;
+          top: 1px;
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: #000;
+          margin-right: 6px;
+        }
+        &.javascript{
+          &:before{
+              background-color: #f1e05a;
+          }
+        }
+        &.html{
+          &:before{
+            background-color: #e34c26;
+          }
+        }
+        &.css{
+          &:before{
+            background-color: #563d7c;
+          }
+        }
+        &.java{
+          &:before{
+            background-color: #b07219;
+          }
+        }
+    }
+    a{
+      color: #4078c0;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      display: block;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+}

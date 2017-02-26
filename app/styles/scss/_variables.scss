@@ -1,0 +1,30 @@
+// Color themes
+$themes: (
+      layout-1: #f68e31,
+      layout-2: #b11c54,
+      layout-3: #10a958,
+      layout-4: #6a2569,
+      layout-5: #25bcce,
+);
+
+@mixin theme($name, $color) {
+  .#{$name} {
+    .tw-logo-container{
+      color: $color;
+    }
+    .text-preview{
+      color: $color;
+      border-color: $color;
+    }
+    .job-title{
+      border-color: $color;
+    }
+  }
+
+}
+
+// Including themes
+// By looping through the $themes map
+@each $key, $value in $themes {
+  @include theme($key, $value);
+}
