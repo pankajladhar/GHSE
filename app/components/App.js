@@ -30,7 +30,7 @@ class App extends React.Component {
                     let repoUrl = "https://api.github.com/users/" + txtValue + "/repos?client_id=60b9f23dedffbdfc476c&client_secret=d1c186c6373f96571c0bfcf76b84e4dc6fd0c15a";
                     HttpWrapper.get(repoUrl).
                         then((res) => {
-                            if(res.lenght > 0) {
+                            if(res.length > 0) {
                                 this.setState({ repos: res });
                             }
                             else{
