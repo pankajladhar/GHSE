@@ -427,6 +427,8 @@ ul {
     height: 38px; }
     .header input[type="text"]:active, .header input[type="text"]:focus {
       outline: none !important; }
+    .header input[type="text"].error {
+      border: 2px #ff0000 solid; }
 
 .logo-container {
   flex: 1;

@@ -49,6 +49,9 @@
       &:active, &:focus{
         outline: none !important;
       }
+      &.error{
+        border: 2px #ff0000 solid;
+      }
     }  
 }
 

@@ -1,12 +1,13 @@
 import React from "react";
-
+import _ from "lodash";
 
 class Header extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             selected : "Username",
-            userInput: ""
+            userInput: "",
+            hasError : false
         };
         this.onClickHandler = this.onClickHandler.bind(this);
         this.selectBoxChangeHandler = this.selectBoxChangeHandler.bind(this);
@@ -17,7 +18,8 @@ class Header extends React.Component{
         e.preventDefault();
         let txtValue = this.state.userInput;
         let dropDownSelectedValue = this.state.selected;
-        this.props.searchOnClickHandler(txtValue, dropDownSelectedValue)
+        !_.isEmpty(txtValue) ? this.props.searchOnClickHandler(txtValue, dropDownSelectedValue) :  this.setState({hasError:true});
+             
     }
 
     selectBoxChangeHandler(e){   
@@ -25,7 +27,19 @@ class Header extends React.Component{
     };
 
     onChangeHandler(e){
-        this.setState({userInput : e.target.value});
+        var val = e.target.value;
+        if(_.isEmpty(val)){
+            this.setState({
+                hasError:true,
+                userInput : ""
+            });
+        }
+        else{
+            this.setState({
+                userInput : val,
+                hasError:false
+            });
+        }
     }
 
     render(){
@@ -45,7 +59,7 @@ class Header extends React.Component{
                         </div>
                         <input type="text" 
                                 tabIndex="1"
-                                className="" 
+                                className={this.state.hasError ? "error": ""}
                                 placeholder="Enter A Github Username"
                                 onChange={this.onChangeHandler}
                         />
