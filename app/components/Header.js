@@ -42,6 +42,10 @@ class Header extends React.Component{
         }
     }
 
+    componentDidMount(){
+        this.searchInput.focus();
+    }
+
     render(){
         return(
             <div className="header">
@@ -58,6 +62,7 @@ class Header extends React.Component{
                             </select>
                         </div>
                         <input type="text" 
+                                ref={(input) => { this.searchInput = input; }} 
                                 tabIndex="1"
                                 className={this.state.hasError ? "error": ""}
                                 placeholder="Enter A Github Username"
