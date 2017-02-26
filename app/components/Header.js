@@ -13,7 +13,8 @@ class Header extends React.Component{
         this.onChangeHandler = this.onChangeHandler.bind(this);
     };
 
-    onClickHandler(){
+    onClickHandler(e){
+        e.preventDefault();
         let txtValue = this.state.userInput;
         let dropDownSelectedValue = this.state.selected;
         this.props.searchOnClickHandler(txtValue, dropDownSelectedValue)
@@ -35,18 +36,21 @@ class Header extends React.Component{
                     <div className="tagline">Github Search Engine</div>
                 </div>
                 <div className="seachOptions">
-                    <div className="select-style">
-                        <select defaultValue={this.state.selected} onChange={this.selectBoxChangeHandler}>
-                            <option value="Username">Username</option>
-                            <option value="Repos">Repos</option>
-                        </select>
-                    </div>
-                    <input type="text" 
-                            className="" 
-                            placeholder="Enter A Github Username"
-                            onChange={this.onChangeHandler}
-                    />
-                    <i className="fa fa-search" aria-hidden="true" onClick={this.onClickHandler}></i>
+                   <form action="" onSubmit={this.onClickHandler}>
+                        <div className="select-style">
+                            <select defaultValue={this.state.selected} onChange={this.selectBoxChangeHandler}>
+                                <option value="Username">Username</option>
+                                <option value="Repos">Repos</option>
+                            </select>
+                        </div>
+                        <input type="text" 
+                                tabIndex="1"
+                                className="" 
+                                placeholder="Enter A Github Username"
+                                onChange={this.onChangeHandler}
+                        />
+                        <i tabIndex="2" className="fa fa-search" aria-hidden="true" onClick={this.onClickHandler}></i>
+                   </form>
                 </div>
                 <div className="socialIcons">
                     <ul>

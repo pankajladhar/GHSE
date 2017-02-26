@@ -43,6 +43,11 @@ ul{
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
+    .placeholder{
+      text-align: center;
+      transform: translateX(-100px);
+      font-size: 24px;
+    }
   .aside{
     width: 22%; 
     display: flex;

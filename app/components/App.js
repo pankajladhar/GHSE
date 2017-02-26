@@ -30,18 +30,26 @@ class App extends React.Component {
                     let repoUrl = "https://api.github.com/users/" + txtValue + "/repos?client_id=60b9f23dedffbdfc476c&client_secret=d1c186c6373f96571c0bfcf76b84e4dc6fd0c15a";
                     HttpWrapper.get(repoUrl).
                         then((res) => {
-                            this.setState({ repos: res });
+                            if(res.lenght > 0) {
+                                this.setState({ repos: res });
+                            }
+                            else{
+                                document.querySelector('.placeholder').innerHTML = `No Repos found for <strong>${txtValue}</strong>`;
+                            }
                             this.setState({isLoading : false})
                         })
                         .catch((error) => {
                             this.setState({ repos: "" })
-                            console.log("inside error block", error);
+                            this.setState({isLoading : false});
+                            console.log("second inside error block", error);
                         });
 
                 })
                 .catch((error) => {
-                    this.setState({ userInfo: "" })
-                    console.log("inside error block", error);
+                    this.setState({ userInfo: "" });
+                    document.querySelector('.placeholder').innerHTML = `<strong>${txtValue}</strong> does not exit on GitHub`;
+                    this.setState({isLoading : false});
+                    console.log("first inside error block", error);
                 });
         }
     }
@@ -69,6 +77,7 @@ class App extends React.Component {
                     : ""
                 }
 
+                {!_.isEmpty(repos) ? 
                 <div className = "content">
                     <h4> Repositories </h4> 
                     <div className = "repositories"> 
@@ -80,7 +89,11 @@ class App extends React.Component {
                             })
                         } 
                     </div> 
-                </div> 
+                </div> : 
+                <div className="content placeholder">
+                    Please Enter Search String
+                </div>
+                }
             </div>
             {this.state.isLoading ? <Loader /> :" "}            
         </div>
