@@ -19839,7 +19839,7 @@
 	                        _this2.setState({ userInfo: res });
 	                        var repoUrl = "https://api.github.com/users/" + txtValue + "/repos?client_id=60b9f23dedffbdfc476c&client_secret=d1c186c6373f96571c0bfcf76b84e4dc6fd0c15a";
 	                        _HttpWrapper.HttpWrapper.get(repoUrl).then(function (res) {
-	                            if (res.lenght > 0) {
+	                            if (res.length > 0) {
 	                                _this2.setState({ repos: res });
 	                            } else {
 	                                document.querySelector('.placeholder').innerHTML = 'No Repos found for <strong>' + String(txtValue) + '</strong>';
