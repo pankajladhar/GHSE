@@ -168,11 +168,38 @@ ul{
     margin-bottom: 20px;
     box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
     background: #fff;
+    .repo__otherInfo{
+      ul{
+        display: flex;
+        margin-bottom: 10px;
+        li{
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          color: #fff;
+          &:nth-child(1){
+            color: #767676;
+            flex: 2;
+            justify-content: flex-start;
+          }
+          &:nth-child(2){
+            background: #0275d8;
+          }
+          &:nth-child(3){
+            background: #d9534f;
+          }
+          &:nth-child(4){
+              // background: #373a3c;
+              background: #4CAF50; 
+          }
+        }
+      }
+    }
     .repo-language-color {
         &:before{
           content: "";
           position: relative;
-          top: 1px;
+          top: 3px;
           display: inline-block;
           width: 12px;
           height: 12px;

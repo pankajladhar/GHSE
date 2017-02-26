@@ -14,20 +14,23 @@ class Repo extends React.Component{
     render(){
         const {repos} = this.props;
         return(
-                <div className="repo">
+                <div className="repo">                    
                     <span className="repo__name">
                         <a href={repos.html_url} target="_blank">{repos.name}</a>
                     </span>
                     <p className="repo__description">
                         {repos.description}
                     </p>
-                    <div className="repo__language">
+                    <div className="repo__otherInfo">
                         <ul>
                             <li className={"repo-language-color " + this.__getClassName(repos.language)}>{repos.language}</li>
+                            <li>{repos.forks_count + " Forks"}</li>
+                            <li>{repos.watchers + " Watchers"}</li>
+                            <li>{repos.stargazers_count + " Stars"}</li>
                         </ul>
                     </div>
                     <span className="repo_lastUpdated">
-                        {repos.pushed_at}
+                        {"Updated on  " + repos.pushed_at}
                         {/*Updated 11 days ago*/}
                     </span>
                 </div>

@@ -74,7 +74,7 @@ class Header extends React.Component{
                 <div className="socialIcons">
                     <ul>
                         <li>
-                            <a href="" className="socialIcons__linkedIn">
+                            <a href="https://www.linkedin.com/in/pankaj-ladhar-51781137/" target="_blank" className="socialIcons__linkedIn">
                                 <i className="fa fa-linkedin"></i>
                                 <span>LinkedIn</span>
                             </a>
