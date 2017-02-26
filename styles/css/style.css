@@ -613,10 +613,12 @@ ul {
       border-top: 1px #d2cdcd solid;
       margin-top: 20px;
       padding-top: 20px; }
-      .wrapper .aside .otherInfo div .fa {
-        padding-right: 5px;
-        color: #999;
-        font-size: 14px; }
+      .wrapper .aside .otherInfo div {
+        word-break: break-all; }
+        .wrapper .aside .otherInfo div .fa {
+          padding-right: 5px;
+          color: #999;
+          font-size: 14px; }
       .wrapper .aside .otherInfo ul {
         display: flex;
         flex-wrap: wrap;
@@ -660,10 +662,31 @@ ul {
   margin-bottom: 20px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.2);
   background: #fff; }
+  .repo .repo__otherInfo ul {
+    display: flex;
+    margin-bottom: 10px; }
+    .repo .repo__otherInfo ul li {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      color: #fff; }
+      .repo .repo__otherInfo ul li:nth-child(1) {
+        color: #767676;
+        flex: 2;
+        justify-content: flex-start; }
+      .repo .repo__otherInfo ul li:nth-child(2) {
+        background: #0275d8; }
+      .repo .repo__otherInfo ul li:nth-child(3) {
+        background: #d9534f; }
+      .repo .repo__otherInfo ul li:nth-child(4) {
+        background: #4CAF50; }
+  .repo .repo_lastUpdated {
+    font-style: italic;
+    margin-top: 20px; }
   .repo .repo-language-color:before {
     content: "";
     position: relative;
-    top: 1px;
+    top: 3px;
     display: inline-block;
     width: 12px;
     height: 12px;
