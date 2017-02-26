@@ -661,7 +661,9 @@ ul {
   padding: 16px;
   margin-bottom: 20px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.2);
-  background: #fff; }
+  background: #fff;
+  display: flex;
+  flex-direction: column; }
   .repo .repo__otherInfo ul {
     display: flex;
     margin-bottom: 10px; }
@@ -682,7 +684,9 @@ ul {
         background: #4CAF50; }
   .repo .repo_lastUpdated {
     font-style: italic;
-    margin-top: 20px; }
+    margin-top: 10px; }
+  .repo .repo__description {
+    flex: 1 0 auto; }
   .repo .repo-language-color:before {
     content: "";
     position: relative;
