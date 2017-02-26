@@ -404,6 +404,9 @@ ul {
       top: 0;
       padding: 5px 10px;
       cursor: pointer; }
+  .header form {
+    display: flex;
+    width: 100%; }
   .header input[type="text"] {
     flex: 3;
     display: flex;
@@ -556,6 +559,10 @@ ul {
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto; }
+  .wrapper .placeholder {
+    text-align: center;
+    transform: translateX(-100px);
+    font-size: 24px; }
   .wrapper .aside {
     width: 22%;
     display: flex;

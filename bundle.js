@@ -19839,15 +19839,22 @@
 	                        _this2.setState({ userInfo: res });
 	                        var repoUrl = "https://api.github.com/users/" + txtValue + "/repos?client_id=60b9f23dedffbdfc476c&client_secret=d1c186c6373f96571c0bfcf76b84e4dc6fd0c15a";
 	                        _HttpWrapper.HttpWrapper.get(repoUrl).then(function (res) {
-	                            _this2.setState({ repos: res });
+	                            if (res.lenght > 0) {
+	                                _this2.setState({ repos: res });
+	                            } else {
+	                                document.querySelector('.placeholder').innerHTML = 'No Repos found for <strong>' + String(txtValue) + '</strong>';
+	                            }
 	                            _this2.setState({ isLoading: false });
 	                        })['catch'](function (error) {
 	                            _this2.setState({ repos: "" });
-	                            console.log("inside error block", error);
+	                            _this2.setState({ isLoading: false });
+	                            console.log("second inside error block", error);
 	                        });
 	                    })['catch'](function (error) {
 	                        _this2.setState({ userInfo: "" });
-	                        console.log("inside error block", error);
+	                        document.querySelector('.placeholder').innerHTML = '<strong>' + String(txtValue) + '</strong> does not exit on GitHub';
+	                        _this2.setState({ isLoading: false });
+	                        console.log("first inside error block", error);
 	                    });
 	                }
 	            }
@@ -19884,7 +19891,7 @@
 	                        'div',
 	                        { className: 'wrapper' },
 	                        !_lodash2['default'].isEmpty(userInfo) ? _react2['default'].createElement(_UserInfo2['default'], { userInfo: this.state.userInfo }) : "",
-	                        _react2['default'].createElement(
+	                        !_lodash2['default'].isEmpty(repos) ? _react2['default'].createElement(
 	                            'div',
 	                            { className: 'content' },
 	                            _react2['default'].createElement(
@@ -19901,6 +19908,10 @@
 	                                    });
 	                                })
 	                            )
+	                        ) : _react2['default'].createElement(
+	                            'div',
+	                            { className: 'content placeholder' },
+	                            'Please Enter Search String'
 	                        )
 	                    ),
 	                    this.state.isLoading ? _react2['default'].createElement(_Loader2['default'], null) : " "
@@ -37113,7 +37124,8 @@
 	    _createClass(Header, [{
 	        key: "onClickHandler",
 	        value: function () {
-	            function onClickHandler() {
+	            function onClickHandler(e) {
+	                e.preventDefault();
 	                var txtValue = this.state.userInput;
 	                var dropDownSelectedValue = this.state.selected;
 	                this.props.searchOnClickHandler(txtValue, dropDownSelectedValue);
@@ -37164,29 +37176,34 @@
 	                        "div",
 	                        { className: "seachOptions" },
 	                        _react2["default"].createElement(
-	                            "div",
-	                            { className: "select-style" },
+	                            "form",
+	                            { action: "", onSubmit: this.onClickHandler },
 	                            _react2["default"].createElement(
-	                                "select",
-	                                { defaultValue: this.state.selected, onChange: this.selectBoxChangeHandler },
+	                                "div",
+	                                { className: "select-style" },
 	                                _react2["default"].createElement(
-	                                    "option",
-	                                    { value: "Username" },
-	                                    "Username"
-	                                ),
-	                                _react2["default"].createElement(
-	                                    "option",
-	                                    { value: "Repos" },
-	                                    "Repos"
+	                                    "select",
+	                                    { defaultValue: this.state.selected, onChange: this.selectBoxChangeHandler },
+	                                    _react2["default"].createElement(
+	                                        "option",
+	                                        { value: "Username" },
+	                                        "Username"
+	                                    ),
+	                                    _react2["default"].createElement(
+	                                        "option",
+	                                        { value: "Repos" },
+	                                        "Repos"
+	                                    )
 	                                )
-	                            )
-	                        ),
-	                        _react2["default"].createElement("input", { type: "text",
-	                            className: "",
-	                            placeholder: "Enter A Github Username",
-	                            onChange: this.onChangeHandler
-	                        }),
-	                        _react2["default"].createElement("i", { className: "fa fa-search", "aria-hidden": "true", onClick: this.onClickHandler })
+	                            ),
+	                            _react2["default"].createElement("input", { type: "text",
+	                                tabIndex: "1",
+	                                className: "",
+	                                placeholder: "Enter A Github Username",
+	                                onChange: this.onChangeHandler
+	                            }),
+	                            _react2["default"].createElement("i", { tabIndex: "2", className: "fa fa-search", "aria-hidden": "true", onClick: this.onClickHandler })
+	                        )
 	                    ),
 	                    _react2["default"].createElement(
 	                        "div",
