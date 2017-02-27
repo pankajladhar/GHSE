@@ -170,6 +170,7 @@ ul{
     background: #fff;
     display:flex;
     flex-direction: column;
+    position: relative;
     .repo__otherInfo{
       ul{
         display: flex;
@@ -200,6 +201,7 @@ ul{
     .repo_lastUpdated{
       font-style: italic;
       margin-top: 10px;
+      margin-bottom: 20px;
     }
     .repo__description{
         flex: 1 0 auto;
@@ -245,6 +247,27 @@ ul{
       display: block;
       &:hover{
         text-decoration: underline;
+      }
+    }
+    .repo__codePercentage{
+      ul{
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #676565;
+        color: #fff;
+        li{
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-right: 1px #fff solid;
+          &:last-child{
+            border-right: none;
+          }
+        }
       }
     }
 }

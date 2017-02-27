@@ -83,9 +83,7 @@ class App extends React.Component {
                     <div className = "repositories"> 
                         {
                             repos.map((repo, i) => {
-                                return <Repo key = { i }
-                                repos = { repo }
-                                />
+                                return <Repo key = {i} repos = {repo} />
                             })
                         } 
                     </div> 

@@ -2,10 +2,15 @@
 
 import React from "react";
 import moment from 'moment';
+import { HttpWrapper } from "./../helpers/HttpWrapper";
+import LangaugePercentage from "./LangaugePercentage";
 
 class Repo extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            langData : {}
+        }
     };
 
     __getClassName(val){
@@ -14,6 +19,12 @@ class Repo extends React.Component{
 
     __getFromattedDate(d){
         return moment(d).format("MMMM Do YYYY, h:mm:ss a")
+    }
+
+    componentDidMount(){
+        HttpWrapper.get(this.props.repos.languages_url).then((res)=>{
+            this.setState({langData: res});
+        });
     }
 
     render(){
@@ -36,6 +47,9 @@ class Repo extends React.Component{
                     </div>
                     <div className="repo_lastUpdated">
                         {"Updated on  " + this.__getFromattedDate(repos.pushed_at)}
+                    </div>
+                    <div className="repo__codePercentage">
+                        <LangaugePercentage langData ={this.state.langData}/>
                     </div>
                 </div>
         )
