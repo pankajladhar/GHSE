@@ -19833,11 +19833,12 @@
 
 	                // console.log(dropDownSelectedValue);
 	                if (dropDownSelectedValue == "Username") {
+
 	                    this.setState({ isLoading: true });
-	                    var userUrl = "https://api.github.com/users/" + txtValue + "?client_id=60b9f23dedffbdfc476c&client_secret=d1c186c6373f96571c0bfcf76b84e4dc6fd0c15a";
+	                    var userUrl = Constants.USER_URL.replace("{userName}", txtValue);
 	                    _HttpWrapper.HttpWrapper.get(userUrl).then(function (res) {
 	                        _this2.setState({ userInfo: res });
-	                        var repoUrl = "https://api.github.com/users/" + txtValue + "/repos?client_id=60b9f23dedffbdfc476c&client_secret=d1c186c6373f96571c0bfcf76b84e4dc6fd0c15a";
+	                        var repoUrl = Constants.REPO_URL.replace("{userName}", txtValue);
 	                        _HttpWrapper.HttpWrapper.get(repoUrl).then(function (res) {
 	                            if (res.length > 0) {
 	                                _this2.setState({ repos: res });
@@ -37041,11 +37042,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	// const CLIENT_ID = "9fe0ebfb3ec24757e35d6fade75692c5128300c6
-	var CLIENT_ID = exports.CLIENT_ID = "60b9f23dedffbdfc476c";
-	var CLIENT_SECRET = exports.CLIENT_SECRET = "d1c186c6373f96571c0bfcf76b84e4dc6fd0c15a";
-	var USER_URL = exports.USER_URL = "https://api.github.com/users/pankajladhar";
-	var REPO_URL = exports.REPO_URL = "https://api.github.com/users/pankajladhar/repos?client_id=60b9f23dedffbdfc476c&client_secret=d1c186c6373f96571c0bfcf76b84e4dc6fd0c15a";
+	var CLIENT_ID = exports.CLIENT_ID = "4ddf9cf2655d5a56cc61";
+	var CLIENT_SECRET = exports.CLIENT_SECRET = "695a1d2b6e44672200c8f31a01530f10d9e6206c";
+	var USER_URL = exports.USER_URL = "https://api.github.com/users/{userName}?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET;
+	var REPO_URL = exports.REPO_URL = "https://api.github.com/users/{userName}/repos?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET;
 
 /***/ },
 /* 163 */
