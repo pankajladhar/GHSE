@@ -19903,9 +19903,7 @@
 	                                'div',
 	                                { className: 'repositories' },
 	                                repos.map(function (repo, i) {
-	                                    return _react2['default'].createElement(_Repo2['default'], { key: i,
-	                                        repos: repo
-	                                    });
+	                                    return _react2['default'].createElement(_Repo2['default'], { key: i, repos: repo });
 	                                })
 	                            )
 	                        ) : _react2['default'].createElement(
@@ -37530,6 +37528,12 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
+	var _HttpWrapper = __webpack_require__(163);
+
+	var _LangaugePercentage = __webpack_require__(278);
+
+	var _LangaugePercentage2 = _interopRequireDefault(_LangaugePercentage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37544,7 +37548,12 @@
 	    function Repo(props) {
 	        _classCallCheck(this, Repo);
 
-	        return _possibleConstructorReturn(this, (Repo.__proto__ || Object.getPrototypeOf(Repo)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (Repo.__proto__ || Object.getPrototypeOf(Repo)).call(this, props));
+
+	        _this.state = {
+	            langData: {}
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Repo, [{
@@ -37564,6 +37573,19 @@
 	            }
 
 	            return __getFromattedDate;
+	        }()
+	    }, {
+	        key: 'componentDidMount',
+	        value: function () {
+	            function componentDidMount() {
+	                var _this2 = this;
+
+	                _HttpWrapper.HttpWrapper.get(this.props.repos.languages_url).then(function (res) {
+	                    _this2.setState({ langData: res });
+	                });
+	            }
+
+	            return componentDidMount;
 	        }()
 	    }, {
 	        key: 'render',
@@ -37620,6 +37642,11 @@
 	                        'div',
 	                        { className: 'repo_lastUpdated' },
 	                        "Updated on  " + this.__getFromattedDate(repos.pushed_at)
+	                    ),
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'repo__codePercentage' },
+	                        _react2['default'].createElement(_LangaugePercentage2['default'], { langData: this.state.langData })
 	                    )
 	                );
 	            }
@@ -52518,6 +52545,88 @@
 
 	})));
 
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _lodash = __webpack_require__(160);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LangaugePercentage = function (_React$Component) {
+	    _inherits(LangaugePercentage, _React$Component);
+
+	    function LangaugePercentage(props) {
+	        _classCallCheck(this, LangaugePercentage);
+
+	        return _possibleConstructorReturn(this, (LangaugePercentage.__proto__ || Object.getPrototypeOf(LangaugePercentage)).call(this, props));
+	    }
+
+	    _createClass(LangaugePercentage, [{
+	        key: "__getPercentage",
+	        value: function () {
+	            function __getPercentage(lines) {
+	                var values = _lodash2["default"].values(this.props.langData);
+	                var total = _lodash2["default"].reduce(values, function (sum, value) {
+	                    return sum + value;
+	                }, 0);
+	                return (lines / total * 100).toFixed(2) + "%";
+	            }
+
+	            return __getPercentage;
+	        }()
+	    }, {
+	        key: "render",
+	        value: function () {
+	            function render() {
+	                var _this2 = this;
+
+	                var langData = this.props.langData;
+
+	                return _react2["default"].createElement(
+	                    "ul",
+	                    null,
+	                    _lodash2["default"].map(langData, function (per, lang) {
+	                        return _react2["default"].createElement(
+	                            "li",
+	                            { key: lang },
+	                            lang + " " + _this2.__getPercentage(per)
+	                        );
+	                    })
+	                );
+	            }
+
+	            return render;
+	        }()
+	    }]);
+
+	    return LangaugePercentage;
+	}(_react2["default"].Component);
+
+	;
+
+	exports["default"] = LangaugePercentage;
 
 /***/ }
 /******/ ]);

@@ -661,7 +661,10 @@ ul {
   padding: 16px;
   margin-bottom: 20px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.2);
-  background: #fff; }
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  position: relative; }
   .repo .repo__otherInfo ul {
     display: flex;
     margin-bottom: 10px; }
@@ -682,7 +685,10 @@ ul {
         background: #4CAF50; }
   .repo .repo_lastUpdated {
     font-style: italic;
-    margin-top: 20px; }
+    margin-top: 10px;
+    margin-bottom: 20px; }
+  .repo .repo__description {
+    flex: 1 0 auto; }
   .repo .repo-language-color:before {
     content: "";
     position: relative;
@@ -709,5 +715,21 @@ ul {
     display: block; }
     .repo a:hover {
       text-decoration: underline; }
+  .repo .repo__codePercentage ul {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #676565;
+    color: #fff; }
+    .repo .repo__codePercentage ul li {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px #fff solid; }
+      .repo .repo__codePercentage ul li:last-child {
+        border-right: none; }
 
 /*# sourceMappingURL=style.css.map */
