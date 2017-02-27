@@ -22,12 +22,13 @@ class App extends React.Component {
     searchOnClickHandler(txtValue, dropDownSelectedValue) {
         // console.log(dropDownSelectedValue);
         if (dropDownSelectedValue == "Username") {
+            
             this.setState({isLoading : true});
-            let userUrl = "https://api.github.com/users/" + txtValue + "?client_id=60b9f23dedffbdfc476c&client_secret=d1c186c6373f96571c0bfcf76b84e4dc6fd0c15a";
+            let userUrl = Constants.USER_URL.replace("{userName}",txtValue);
             HttpWrapper.get(userUrl).
                 then((res) => {
                     this.setState({ userInfo: res });
-                    let repoUrl = "https://api.github.com/users/" + txtValue + "/repos?client_id=60b9f23dedffbdfc476c&client_secret=d1c186c6373f96571c0bfcf76b84e4dc6fd0c15a";
+                    let repoUrl = Constants.REPO_URL.replace("{userName}",txtValue);
                     HttpWrapper.get(repoUrl).
                         then((res) => {
                             if(res.length > 0) {
