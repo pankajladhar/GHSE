@@ -2,6 +2,7 @@
 
 import React from "react";
 import moment from 'moment';
+import * as Constants from "./../helpers/Constants";
 import { HttpWrapper } from "./../helpers/HttpWrapper";
 import LangaugePercentage from "./LangaugePercentage";
 
@@ -22,7 +23,7 @@ class Repo extends React.Component{
     }
 
     componentDidMount(){
-        HttpWrapper.get(this.props.repos.languages_url).then((res)=>{
+        HttpWrapper.get(this.props.repos.languages_url+"?client_id="+Constants.CLIENT_ID+"&client_secret="+Constants.CLIENT_SECRET).then((res)=>{
             this.setState({langData: res});
         });
     }
