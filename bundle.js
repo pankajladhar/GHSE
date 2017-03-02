@@ -19820,7 +19820,10 @@
 	        _this.state = {
 	            repos: [],
 	            userInfo: {},
-	            isLoading: false
+	            isLoading: false,
+	            repositories: [],
+	            showWrapperOne: true,
+	            showWrapperTwo: false
 	        };
 	        return _this;
 	    }
@@ -19831,10 +19834,12 @@
 	            function searchOnClickHandler(txtValue, dropDownSelectedValue) {
 	                var _this2 = this;
 
-	                // console.log(dropDownSelectedValue);
 	                if (dropDownSelectedValue == "Username") {
-
-	                    this.setState({ isLoading: true });
+	                    this.setState({
+	                        isLoading: true,
+	                        showWrapperOne: true,
+	                        showWrapperTwo: false
+	                    });
 	                    var userUrl = Constants.USER_URL.replace("{userName}", txtValue);
 	                    _HttpWrapper.HttpWrapper.get(userUrl).then(function (res) {
 	                        _this2.setState({ userInfo: res });
@@ -19857,38 +19862,63 @@
 	                        _this2.setState({ isLoading: false });
 	                        console.log("first inside error block", error);
 	                    });
+	                } else {
+	                    this.setState({
+	                        isLoading: true,
+	                        showWrapperOne: false,
+	                        showWrapperTwo: true
+	                    });
+	                    var repositoriesUrl = Constants.REPOSITORIES_URL.replace("{query}", txtValue);
+	                    _HttpWrapper.HttpWrapper.get(repositoriesUrl).then(function (res) {
+	                        _this2.setState({
+	                            repositories: res.items
+	                        });
+	                        _this2.setState({ isLoading: false });
+	                    });
 	                }
 	            }
 
 	            return searchOnClickHandler;
 	        }()
-	        // componentDidMount() {
-	        //     window.addEventListener('scroll', this.handleScroll);
-	        // }
+	    }, {
+	        key: '__renderLangaugeCountInRepo',
+	        value: function () {
+	            function __renderLangaugeCountInRepo(repositories) {
 
-	        // componentWillUnmount() {
-	        //     window.removeEventListener('scroll', this.handleScroll);
-	        // }
+	                var repos = _lodash2['default'].groupBy(_lodash2['default'].map(repositories, function (repo) {
+	                    return _lodash2['default'].pick(repo, "language");
+	                }), function (l) {
+	                    return l.language;
+	                });
 
-	        // handleScroll(event) {
-	        //     let scrollTop = event.srcElement.body.scrollTop,
-	        //         itemTranslate = Math.min(0, scrollTop/3 - 60);
-	        //         console.log(itemTranslate);
-	        // }
+	                return _lodash2['default'].map(repos, function (value, key) {
+	                    return _react2['default'].createElement(
+	                        'li',
+	                        { key: key },
+	                        key,
+	                        value.length
+	                    );
+	                });
+	            }
 
+	            return __renderLangaugeCountInRepo;
+	        }()
 	    }, {
 	        key: 'render',
 	        value: function () {
 	            function render() {
 	                var _state = this.state,
 	                    repos = _state.repos,
-	                    userInfo = _state.userInfo;
+	                    userInfo = _state.userInfo,
+	                    repositories = _state.repositories,
+	                    showWrapperOne = _state.showWrapperOne,
+	                    showWrapperTwo = _state.showWrapperTwo;
 
 	                return _react2['default'].createElement(
 	                    'div',
 	                    null,
 	                    _react2['default'].createElement(_Header2['default'], { searchOnClickHandler: this.searchOnClickHandler }),
-	                    _react2['default'].createElement(
+	                    showWrapperOne ? _react2['default'].createElement(
 	                        'div',
 	                        { className: 'wrapper' },
 	                        !_lodash2['default'].isEmpty(userInfo) ? _react2['default'].createElement(_UserInfo2['default'], { userInfo: this.state.userInfo }) : "",
@@ -19912,7 +19942,62 @@
 	                            { className: 'content placeholder' },
 	                            'Please Enter Search String'
 	                        )
-	                    ),
+	                    ) : null,
+	                    showWrapperTwo ? _react2['default'].createElement(
+	                        'div',
+	                        { className: 'wrapper repositories-wrapper' },
+	                        _react2['default'].createElement(
+	                            'div',
+	                            { className: 'aside' },
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'container' },
+	                                _react2['default'].createElement(
+	                                    'h4',
+	                                    null,
+	                                    'Languages'
+	                                ),
+	                                _react2['default'].createElement(
+	                                    'ul',
+	                                    null,
+	                                    this.__renderLangaugeCountInRepo(repositories)
+	                                )
+	                            )
+	                        ),
+	                        !_lodash2['default'].isEmpty(repositories) ? _react2['default'].createElement(
+	                            'div',
+	                            { className: 'content' },
+	                            _react2['default'].createElement(
+	                                'h4',
+	                                null,
+	                                ' Repositories '
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'repositories' },
+	                                repositories.map(function (repo, i) {
+	                                    return _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'repository', key: i },
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'repository__container' },
+	                                            _react2['default'].createElement('img', { src: repo.owner.avatar_url, alt: '' })
+	                                        ),
+	                                        _react2['default'].createElement(
+	                                            'div',
+	                                            { className: 'repository__content' },
+	                                            _react2['default'].createElement(_Repo2['default'], { repos: repo })
+	                                        )
+	                                    );
+	                                })
+	                            )
+	                        ) : _react2['default'].createElement(
+	                            'div',
+	                            { className: 'content placeholder' },
+	                            'Please Enter Search String'
+	                        )
+	                    ) : null,
 	                    this.state.isLoading ? _react2['default'].createElement(_Loader2['default'], null) : " "
 	                );
 	            }
@@ -37046,6 +37131,7 @@
 	var CLIENT_SECRET = exports.CLIENT_SECRET = "695a1d2b6e44672200c8f31a01530f10d9e6206c";
 	var USER_URL = exports.USER_URL = "https://api.github.com/users/{userName}?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET;
 	var REPO_URL = exports.REPO_URL = "https://api.github.com/users/{userName}/repos?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET;
+	var REPOSITORIES_URL = exports.REPOSITORIES_URL = "https://api.github.com/search/repositories?q={query}&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET;
 
 /***/ },
 /* 163 */
@@ -37528,11 +37614,17 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
+	var _Constants = __webpack_require__(162);
+
+	var Constants = _interopRequireWildcard(_Constants);
+
 	var _HttpWrapper = __webpack_require__(163);
 
 	var _LangaugePercentage = __webpack_require__(278);
 
 	var _LangaugePercentage2 = _interopRequireDefault(_LangaugePercentage);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -37580,7 +37672,8 @@
 	            function componentDidMount() {
 	                var _this2 = this;
 
-	                _HttpWrapper.HttpWrapper.get(this.props.repos.languages_url).then(function (res) {
+	                var url = this.props.repos.languages_url + "?client_id=" + Constants.CLIENT_ID + "&client_secret=" + Constants.CLIENT_SECRET;
+	                _HttpWrapper.HttpWrapper.get(url).then(function (res) {
 	                    _this2.setState({ langData: res });
 	                });
 	            }
@@ -37602,7 +37695,12 @@
 	                        _react2['default'].createElement(
 	                            'a',
 	                            { href: repos.html_url, target: '_blank' },
-	                            repos.name
+	                            repos.name,
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'repo_fullName' },
+	                                repos.full_name
+	                            )
 	                        )
 	                    ),
 	                    _react2['default'].createElement(
