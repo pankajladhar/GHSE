@@ -23,7 +23,8 @@ class Repo extends React.Component{
     }
 
     componentDidMount(){
-        HttpWrapper.get(this.props.repos.languages_url+"?client_id="+Constants.CLIENT_ID+"&client_secret="+Constants.CLIENT_SECRET).then((res)=>{
+        const url = this.props.repos.languages_url+"?client_id="+Constants.CLIENT_ID+"&client_secret="+Constants.CLIENT_SECRET
+        HttpWrapper.get(url).then((res)=>{
             this.setState({langData: res});
         });
     }
@@ -33,7 +34,9 @@ class Repo extends React.Component{
         return(
                 <div className="repo">                    
                     <span className="repo__name">
-                        <a href={repos.html_url} target="_blank">{repos.name}</a>
+                        <a href={repos.html_url} target="_blank">{repos.name}
+                            <span className="repo_fullName">{repos.full_name}</span>
+                        </a>
                     </span>
                     <p className="repo__description">
                         {repos.description}
